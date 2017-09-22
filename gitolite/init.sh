@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Copy over SSH persistent folder and change permissions
+if [ -d /etc/ssh-persistent ]; then
+   cp -r /etc/ssh-persistent/* /etc/ssh/
+   chmod 600 /etc/ssh/*
+fi
 
 # First, make sure we have a host key; there are multiple host key
 # files, we just check that one of them exists.
@@ -113,6 +118,10 @@ else
     su git -c "bin/gitolite setup"
 fi
 
+# Copy back SSH to persistent folder
+if [ -d /etc/ssh-persistent ]; then
+   cp -rf /etc/ssh/* /etc/ssh-persistent/
+fi
 
 # Allow to specificy "sshd" as a command.
 if [ "${1}" = 'sshd' ]; then

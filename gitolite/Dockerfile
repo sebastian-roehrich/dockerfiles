@@ -45,7 +45,7 @@ ADD ./init.sh /init
 
 # Addind volume to repositories directory
 VOLUME /home/git/repositories
-VOLUME /etc/ssh
+VOLUME /etc/ssh-persistent
 
 RUN chmod +x /init
 ENTRYPOINT ["/usr/sbin/init"]
